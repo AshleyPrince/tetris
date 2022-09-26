@@ -34,7 +34,6 @@ const Tetris = () => {
 
   const keyUp = ({ keyCode }) => {
     if (!gameOver) {
-      // aktiviert den intervall erneut, wenn der user den pfeil nach unten drueckt
       if (keyCode === 40) {
         setDropTime(1000 / (level + 1));
       }
@@ -42,22 +41,23 @@ const Tetris = () => {
   };
 
   const startGame = () => {
-    // setzt alles zurueck
+    // Reset
+
     setStage(createStage());
     setDropTime(1000);
     resetPlayer();
     setScore(0);
     setLevel(0);
-    setRows(0);
+    setRows(0);    
+    debugger;
     setGameOver(false);
   };
 
   const drop = () => {
-    // Steigert Level wenn der Spieler 10 Reihen geceart hat
-    console.log("drop");
+    // nach 10 reihen wir das leven gesteigert
     if (rows > (level + 1) * 10) {
       setLevel(prev => prev + 1);
-      // geschwindigkeit steigern
+      // macht shcneller
       setDropTime(1000 / (level + 1) + 200);
     }
 
@@ -75,12 +75,11 @@ const Tetris = () => {
   };
 
   const dropPlayer = () => {
-    setDropTime(null);
     drop();
   };
 
-  // Game Start
-   useInterval(() => {
+  // Startet das Spiel
+  useInterval(() => {
     drop();
   }, dropTime);
 
