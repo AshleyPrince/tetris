@@ -1,4 +1,4 @@
-import React, { useStage } from 'react';
+import React, { useState } from 'react';
 
 import { createStage, checkCollision } from '../gameHelpers';
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris';
@@ -15,8 +15,8 @@ import Display from './Display';
 import StartButton from './StartButton';
 
 const Tetris = () => {
-  const [dropTime, setDropTime] = useStage(null);
-  const [gameOver, setGameOver] = useStage(false);
+  const [dropTime, setDropTime] = useState(null);
+  const [gameOver, setGameOver] = useState(false);
 
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
   const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
@@ -54,6 +54,7 @@ const Tetris = () => {
 
   const drop = () => {
     // Steigert Level wenn der Spieler 10 Reihen geceart hat
+    console.log("drop");
     if (rows > (level + 1) * 10) {
       setLevel(prev => prev + 1);
       // geschwindigkeit steigern
